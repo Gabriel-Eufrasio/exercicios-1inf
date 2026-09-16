@@ -10,9 +10,9 @@ let cliente = "Lucas Almeida"
       
       let estoqueDisponivel;
       
-      if (quantidade<=estoque){
+     if (quantidade<=estoque){
         estoqueDisponivel = "Sim"
-             }
+             } 
             else{
                 estoqueindisponivel = "Não"
                 ("estoque indisponivel")
