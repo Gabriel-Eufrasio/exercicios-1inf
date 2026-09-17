@@ -8,7 +8,7 @@ let cliente = "Lucas Almeida"
       let subtotal = preco*quantidade
 
       
-      let estoqueDisponivel;
+      let estoqueDisponivel
       
      if (quantidade<=estoque){
         estoqueDisponivel = "Sim"
@@ -18,7 +18,7 @@ let cliente = "Lucas Almeida"
                 ("estoque indisponivel")
             }
             //
-            let descontoPercentual;
+            let descontoPercentual
             if (subtotal >= 1000) {
                 descontoPercentual = 10
             } else {
