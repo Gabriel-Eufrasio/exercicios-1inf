@@ -37,7 +37,7 @@ let valorFinal = subtotal + valorTaxa
              
                 pagamentoStatus = "Pagamento aprovado"
 }          else {
-    pagamentoStatus = "Pagamento insuficiente"
+    pagamentoStatus = "Pagamento insuficien"
 }
 
 // troco feito
