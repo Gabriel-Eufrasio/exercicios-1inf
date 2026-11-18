@@ -1,51 +1,94 @@
 const prompt = require("prompt-sync")()
 
-const quantidadeDeDias = Number(prompt("Quantidade de dias de dias da semana registrados"))
-const metaDiaria = Number(prompt("A meta diária de vendas é"))
-const metaSemanal =  Number(prompt("A meta de vendas da semana é"))
+const precoUnitario =  Number(prompt("Digite o preço unitario do produto:"))
+const quantidade = Number(prompt("Digite a quantidade de produtos:"))
+const formaPagamento = prompt("Digite a forma de pagamento: ")
 //
-let totalVendido = 0 
-let diasAcimaDaMeta = 0 
-let melhorDia = 0
-//
-for (let dia = 1; dia <= quantidadeDeDias; dia++) {
-    const vendaDoDia = Number(prompt(`venda do dia ${dia}`)) 
-
-      totalVendido += vendaDoDia  
-if (vendaDoDia >= metaDiaria) {
-    diasAcimaDaMeta++ 
+const calcularSubtotal = (precoUnitario, quantidade) => {
+    return precoUnitario * quantidade
 }
-if(vendaDoDia > melhorDia) {
-    melhorDia = vendaDoDia 
-}   
-}
-const mediaVendas = totalVendido / quantidadeDeDias
 
 //
-const situacaoSemana = totalVendido >= metaSemanal ? "Meta semanal atingida" : "Meta semanal não atingida" 
+
+const calcularFrete = (subtotal) => {
+    if (subtotal >= 100) {
+        return 0
+    } else {
+        return 10
+    }
+}
 
 
+//
 
+const calcularDesconto = (subtotal, formaPagamento) => {
+    let percentual = 0 
+    switch (formaPagamento) {
+        case "dinheiro":
+            case "pix":
+                percentual = 5
+
+                return (subtotal * percentual) /100
+                case "cartao":
+                  percentual = 0
+
+                  break                 
+                  default:
+                 percentual = 5
+                }
+
+                return (subtotal * percentual) / 100
+
+                } 
+const calcularTotal = (precoUnitario, quantidade, formaPagamento) => {
+    const subtotal = calcularSubtotal(precoUnitario, quantidade)
+    const frete = calcularFrete(subtotal)
+    const desconto = calcularDesconto(subtotal, formaPagamento)
+    return subtotal + frete - desconto
+}
+
+
+//
+
+    const subtotal = calcularSubtotal(precoUnitario, quantidade)
+    const frete = calcularFrete(subtotal)
+    const desconto = calcularDesconto(subtotal, formaPagamento)
+    const total = calcularTotal(precoUnitario, quantidade, formaPagamento)
+
+console.log(calcularTotal(precoUnitario, quantidade, formaPagamento))
+//
 const resumo = `
-Quantidade de dias: ${quantidadeDeDias}
-Meta diária: ${metaDiaria}
-Meta semanal: ${metaSemanal}
-Total vendido: ${totalVendido}
-Média de vendas: ${mediaVendas}
-Dias acima da meta: ${diasAcimaDaMeta}
-Melhor dia: ${melhorDia}
-Situação da semana: ${situacaoSemana}
+    precoUnitario: ${precoUnitario}
+    quantidade: ${quantidade}
+    formaPagamento: ${formaPagamento}
+    calcularSubtotal: ${calcularSubtotal}
+    calcularFrete: ${calcularFrete}
+    calcularDesconto: ${calcularDesconto}
+    calcularTotal: ${calcularTotal}
+    subtotal: ${subtotal}
+    frete: ${frete}
+    desconto: ${desconto}
+    total: ${total}
+   
 `
 console.log(resumo)
 
+
+
+
+
+
 module.exports = {
-    quantidadeDeDias,
-    metaDiaria,
-    metaSemanal,
-    totalVendido,
-    mediaVendas,
-    diasAcimaDaMeta,
-    melhorDia,
-    situacaoSemana,
+    precoUnitario,
+    quantidade,
+    formaPagamento,
+    calcularSubtotal,
+    calcularFrete,
+    calcularDesconto,
+    calcularTotal,
+    subtotal,
+    frete,
+    desconto,
+    total,
     resumo
 }
